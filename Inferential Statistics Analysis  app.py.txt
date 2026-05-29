@@ -1,0 +1,97 @@
+
+!pip install pandas numpy matplotlib seaborn scipy
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from scipy import stats
+
+
+# Student marks dataset
+
+data = {
+    'Maths': [78,85,90,76,88,95,89,84,91,87],
+    'Science': [80,86,92,75,85,96,90,83,93,88]
+}
+
+# Create DataFrame
+
+df = pd.DataFrame(data)
+
+print(df)
+
+
+print("Mean Values")
+
+print(df.mean())
+
+print("\nStandard Deviation")
+
+print(df.std())
+
+
+
+# Perform independent t-test
+
+t_stat, p_value = stats.ttest_ind(
+    df['Maths'],
+    df['Science']
+)
+
+print("T-Statistic:", t_stat)
+print("P-Value:", p_value)
+
+
+correlation = df['Maths'].corr(df['Science'])
+
+print("Correlation:", correlation)
+
+# Step 7: Scatter Plot Visualization
+plt.figure(figsize=(7,5))
+
+plt.scatter(
+    df['Maths'],
+    df['Science'],
+    color='blue'
+)
+
+plt.title("Maths vs Science Marks")
+plt.xlabel("Maths Marks")
+plt.ylabel("Science Marks")
+
+plt.grid(True)
+
+plt.show()
+
+
+plt.figure(figsize=(7,5))
+
+plt.hist(
+    df['Maths'],
+    bins=5,
+    color='green'
+)
+
+plt.title("Maths Marks Distribution")
+plt.xlabel("Marks")
+plt.ylabel("Frequency")
+
+plt.show()
+
+# Step 9: Heatmap Visualization
+plt.figure(figsize=(6,4))
+
+sns.heatmap(
+    df.corr(),
+    annot=True
+)
+
+plt.title("Correlation Heatmap")
+
+plt.show()
+
+
+print("Inferential Statistics Analysis Completed Successfully!")
+
